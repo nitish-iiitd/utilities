@@ -13,18 +13,15 @@
   </head>
   <body>
     <main>
-      <h1>Utilities</h1>
+
+      <h1 style="text-align: center;">Common Utilities</h1>
       <div> <!-- method="POST" action="/api/submit" -->
 
         <div class="input">
-          <label for="utility">Select the Utility</label>
+          <label for="utility">Select a Utility</label>
           <select id="utility" name="utility">
-            <option hidden disabled selected value></option>
-            <option value="ip_list_to_quoted_csv">IP List to Quoted Comma Separated</option>
-            <option value="Twitter">Twitter</option>
-            <option value="Google">Google</option>
-            <option value="Bing">Bing</option>
-            <option value="Friends">Friends</option>
+            <!-- <option hidden disabled selected value></option> -->
+            <option value="list_to_quoted_csv" selected>List to Quoted Comma Separated</option>
           </select>
         </div>
 
@@ -35,25 +32,32 @@
 
         <button type="" onclick="submit()">Submit</button>
       </div>
-      <br><br><hr/><br>
+      <br><br>
       <div class="input" id="output_text_box">
+        <hr/><br>
         <label for="output_text">Output Text</label>
-        <textarea id="output_text" name="output_text" rows="10" cols="100"> </textarea>
+        <textarea id="output_text" name="output_text" rows="10" cols="100"></textarea>
+        <button id="copy_btn" onclick="copyText()">Copy to Clipboard</button>
       </div>
+      
 
     </main>
     <script>
+      var backend_utility_workers = {
+        "list_to_quoted_csv": "https://list-to-quoted-csv.nitish2794.workers.dev"
+      };
+
       function submit() {
         
         var utility = document.getElementById("utility").value;
         var input_text = document.getElementById("input_text").value;
 
         var form = new FormData();
-        form.append("role", "dev");
-        form.append("name", "nitish");
+        form.append("utility", utility);
+        form.append("input_text", input_text);
 
         var settings = {
-          "url": "https://ipformatter.nitish2794.workers.dev",
+          "url": backend_utility_workers[utility],
           "method": "POST",
           "timeout": 0,
           "processData": false,
@@ -64,9 +68,21 @@
 
         $.ajax(settings).done(function (response) {
           console.log(response);
-          document.getElementById("output_text").value = response;
+          document.getElementById("output_text_box").style.display = "block";
+          $('#output_text').text(response);
         });
 
+      }
+
+      function copyText() {
+        var copyText = document.getElementById("output_text");
+
+        /* Select the text field */
+        copyText.select();
+        copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+         /* Copy the text inside the text field */
+        navigator.clipboard.writeText(copyText.value);
       }
 </script>
   </body>
