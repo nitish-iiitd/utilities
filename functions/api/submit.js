@@ -10,13 +10,15 @@ export async function onRequestPost(context) {
     let output = "";
     let utility = form_data['utility']
     let input_text = form_data['input_text']
+    console.log("utility: "+utility)
+    console.log("input_text: "+input_text)
+    output = utility + input_text
+    // if (utility === "ip_list_to_quoted_csv"){
+    //   //alert("Seelcted");
+    // }
 
-    if (utility === "ip_list_to_quoted_csv"){
-      //alert("Seelcted");
-    }
-
-    let pretty = JSON.stringify(output, null, 2);
-    return new Response(pretty, {
+    //let pretty = JSON.stringify(output, null, 2);
+    return new Response(output, {
       headers: {
         'Content-Type': 'application/json;charset=utf-8'
       }
