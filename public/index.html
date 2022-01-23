@@ -12,8 +12,8 @@
   </head>
   <body>
     <main>
-      <h1>Demo: Form Submission</h1>
-      <form method="POST" action="/api/submit">
+      <h1>Utilities</h1>
+      <form> <!-- method="POST" action="/api/submit" -->
 
         <div class="input">
           <label for="utility">Select the Utility</label>
@@ -29,18 +29,31 @@
 
         <div class="input">
           <label for="input_text">Input Text</label>
-          <input id="input_text" name="input_text" type="textarea" />
+          <textarea id="input_text" name="input_text" rows="10" cols="100"></textarea>
         </div>
 
-        <div class="input">
-          <label for="output_text">Output Text</label>
-          <input id="output_text" name="output_text" type="textarea" />
-        </div>
-
-
-
-        <button type="submit">Submit</button>
+        <button type="submit" onclick="submit()">Submit</button>
       </form>
+      <br><br><hr/><br>
+      <div class="input" id="output_text_box">
+        <label for="output_text">Output Text</label>
+        <textarea id="output_text" name="output_text" rows="10" cols="100"> </textarea>
+      </div>
+
     </main>
+    <script>
+      function submit() {
+        var utility = document.getElementById("utility").value;
+        var input_text = document.getElementById("input_text").value;
+
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function() {
+          document.getElementById("output_text").value = this.responseText;
+        }
+        xhttp.open("POST", "/api/submit");
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send("utility="+utility+"&input_text="+input_text);
+      }
+</script>
   </body>
 </html>

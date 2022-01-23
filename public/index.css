@@ -32,7 +32,7 @@ body {
 
 main {
 	padding: 2rem;
-	max-width: 600px;
+	max-width: 900px;
 	border-radius: 4px;
 	background-color: #fff;
 	box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
@@ -52,8 +52,8 @@ blockquote p {
 }
 
 .input {
-  display: block;
-  margin-bottom: 1rem;
+	display: block;
+	margin-bottom: 1rem;
 	line-height: 1.6;
 }
 
@@ -66,7 +66,7 @@ blockquote p {
 .input input,
 .input select {
 	width: 100%;
-  display: block;
+	display: block;
 	background: #fff;
 	border-radius: 2px;
 	border: 1px solid #000;
@@ -102,3 +102,21 @@ button {
 button:hover {
 	background-color: #d86300;
 }
+
+#output_text_box {
+	display: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
