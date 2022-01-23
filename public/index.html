@@ -7,13 +7,14 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="icon" type="image/png" href="https://www.cloudflare.com/favicon-128.png">
     <link rel="stylesheet" href="index.css">
   </head>
   <body>
     <main>
       <h1>Utilities</h1>
-      <form> <!-- method="POST" action="/api/submit" -->
+      <div> <!-- method="POST" action="/api/submit" -->
 
         <div class="input">
           <label for="utility">Select the Utility</label>
@@ -32,8 +33,8 @@
           <textarea id="input_text" name="input_text" rows="10" cols="100"></textarea>
         </div>
 
-        <button type="submit" onclick="submit()">Submit</button>
-      </form>
+        <button type="" onclick="submit()">Submit</button>
+      </div>
       <br><br><hr/><br>
       <div class="input" id="output_text_box">
         <label for="output_text">Output Text</label>
@@ -43,16 +44,29 @@
     </main>
     <script>
       function submit() {
+        
         var utility = document.getElementById("utility").value;
         var input_text = document.getElementById("input_text").value;
 
-        const xhttp = new XMLHttpRequest();
-        xhttp.onload = function() {
-          document.getElementById("output_text").value = this.responseText;
-        }
-        xhttp.open("POST", "api/submit");
-        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhttp.send("utility="+utility+"&input_text="+input_text);
+        var form = new FormData();
+        form.append("role", "dev");
+        form.append("name", "nitish");
+
+        var settings = {
+          "url": "https://ipformatter.nitish2794.workers.dev",
+          "method": "POST",
+          "timeout": 0,
+          "processData": false,
+          "mimeType": "multipart/form-data",
+          "contentType": false,
+          "data": form
+        };
+
+        $.ajax(settings).done(function (response) {
+          console.log(response);
+          document.getElementById("output_text").value = response;
+        });
+
       }
 </script>
   </body>

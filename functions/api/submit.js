@@ -3,27 +3,40 @@
  */
 export async function onRequestPost(context) {
   try {
-    let form_data = await context.request.formData();
+    const form_data = await context.request.formData();
 
     // Convert FormData to JSON
     // NOTE: Allows multiple values per key
-    let output = "";
-    let utility = form_data['utility']
-    let input_text = form_data['input_text']
-    console.log("utility: "+utility)
-    console.log("input_text: "+input_text)
-    output = utility + input_text
-    // if (utility === "ip_list_to_quoted_csv"){
-    //   //alert("Seelcted");
-    // }
+    // let output = "";
+    // let utility = form_data['utility']
+    // let input_text = form_data['input_text']
+    // console.log("utility: "+utility)
+    // console.log("input_text: "+input_text)
+    // output = utility + input_text
 
-    //let pretty = JSON.stringify(output, null, 2);
-    return new Response(output, {
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-      }
-    });
+    //const formData = await request.formData()
+    const body = {}
+    for (const entry of formData.entries()) {
+      body[entry[0]] = entry[1]
+    }
+    //return JSON.stringify(body)
+    return new Response(JSON.stringify(body))
+
+    // return new Response(output, {
+    //   headers: {
+    //     'Content-Type': 'application/json;charset=utf-8'
+    //   }
+    // });
   } catch (err) {
     return new Response('Error parsing JSON content', { status: 400 });
   }
 }
+
+
+"exceptions": [
+    {
+      "name": "TypeError",
+      "message": "Failed to execute function: parameter 1 is not of type 'Response'.",
+      "timestamp": 1642951287259
+    }
+  ],
