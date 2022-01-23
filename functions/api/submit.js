@@ -31,12 +31,3 @@ export async function onRequestPost(context) {
     return new Response('Error parsing JSON content', { status: 400 });
   }
 }
-
-
-"exceptions": [
-    {
-      "name": "TypeError",
-      "message": "Failed to execute function: parameter 1 is not of type 'Response'.",
-      "timestamp": 1642951287259
-    }
-  ],
