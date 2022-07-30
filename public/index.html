@@ -22,6 +22,7 @@
           <select id="utility" name="utility">
             <!-- <option hidden disabled selected value></option> -->
             <option value="list_to_quoted_csv" selected>List to Quoted Comma Separated</option>
+            <option value="list_to_csv" selected>List to Comma Separated</option>
           </select>
         </div>
 
@@ -44,7 +45,8 @@
     </main>
     <script>
       var backend_utility_workers = {
-        "list_to_quoted_csv": "https://list-to-quoted-csv.nitish2794.workers.dev"
+        "list_to_quoted_csv": "https://list-to-quoted-csv.nitish2794.workers.dev",
+        "list_to_csv": "https://list-to-csv.nitish2794.workers.dev"
       };
 
       function submit() {
